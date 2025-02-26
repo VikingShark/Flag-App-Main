@@ -5,7 +5,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #202C36;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,34 +13,8 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-
-button {
-  border-radius: 8px;
-  padding: 10px;
-  font-size: 14px;
-  font-weight: 400;
-  font-family: inherit;
-  background-color: #202C36;
-  cursor: pointer;
-  border: none;
-  transition-duration: 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: white;
-}
-button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 10px;
-  border-radius: 5px;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
 .all-links {
   text-decoration: none;
   color: white
 }
+

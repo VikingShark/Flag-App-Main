@@ -1,6 +1,7 @@
 import { useLoaderData, Link } from "react-router-dom";
 import "./CountryPage.css";
-import backArrow from '../assets/arrow-left.svg'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Button } from '@mui/material';
 
 const CountryPage = () => {
   const response = useLoaderData();
@@ -23,10 +24,18 @@ const CountryPage = () => {
   return (
     <div className="country-page-container">
       <Link className="all-links" to="/">
-        <button>
-          <img className="back-arw" src={backArrow} alt="" />
-          <span>BACK</span>
-        </button>
+        <Button
+            sx={{
+                color: "white",
+                backgroundColor: "transparent",
+                "&:hover": {
+                backgroundColor: "rgba(255, 255, 255, 0.1)", // Ger en vit ton inom knappen vid hover
+                },
+            }}
+            variant="text">
+             {<ArrowBackIcon sx={{fontSize: "20px", mr: 1}} /> }
+            Back
+        </Button>
       </Link>
       <div className="country-page">
         <img className="country-flag" src={country.flags.svg} alt="" />
