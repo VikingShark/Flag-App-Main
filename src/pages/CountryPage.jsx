@@ -7,19 +7,21 @@ const CountryPage = () => {
   const response = useLoaderData();
   const [country] = response;
 
-  // Unique native name
-  const firstNativeNameKey = Object.keys(country.name.nativeName)[0];
-  const firstNativeNameCommon =
-    country.name.nativeName[firstNativeNameKey].common;
+  //Unique native name
+  const firstNativeNameCommon = country.name.nativeName 
+    ? country.name.nativeName[Object.keys(country.name.nativeName || {})[0]]?.common
+    : 'No native name available';
 
-  // Unique currency name
-  const firstNativeCurrencyKey = Object.keys(country.currencies)[0];
-  const firstNativeCurrencyCommon =
-    country.currencies[firstNativeCurrencyKey].name;
+  
+    //  Unique currency name
+    const firstNativeCurrencyCommon = country.currencies ? country.currencies[Object.keys(country.currencies || {})[0]]?.name
+    : 'No currency available';
 
   // Unique language
-  const firstNativeLanguage = Object.keys(country.languages)[0];
-  console.log();
+ 
+  const firstNativeLanguage = country.languages ? country.languages[Object.keys(country.languages)[0]] : 'No language available';
+
+  console.log(country);
 
   return (
     <div className="country-page-container">
@@ -29,7 +31,7 @@ const CountryPage = () => {
                 color: "white",
                 backgroundColor: "transparent",
                 "&:hover": {
-                backgroundColor: "rgba(255, 255, 255, 0.1)", // Ger en vit ton inom knappen vid hover
+                backgroundColor: "#F2F2F220", 
                 },
             }}
             variant="text">
@@ -40,7 +42,7 @@ const CountryPage = () => {
       <div className="country-page">
         <img className="country-flag" src={country.flags.svg} alt="" />
         <div className="country-info-container">
-          <h1>{country.name.common}</h1>
+        <h1>{country?.name?.common || "Not available"}</h1>
           <div className="country-info">
             <div className="country-child">
               <p><strong>Population:</strong> {country.population}</p>

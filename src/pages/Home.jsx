@@ -1,77 +1,99 @@
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./Home.css";
+import {
+  Box,
+  Grid,
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+} from "@mui/material";
 
 import SearchBar from "../components/SearchBar";
-import DropDown from '../components/DropDown'
+import DropDown from "../components/DropDown";
+import CountryCard from "../components/CountryCard";
 
 const HomePage = () => {
   const countries = useLoaderData();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (countries.length > 0) {
+      setLoading(false);
+    }
+  }, [countries])
 
   useEffect(() => {
     navigate("/", { replace: true });
-}, []);
+  }, []);
 
+  if(loading) {
+    return (
+      <div className="home-container">
+        <SearchBar /> 
+        <DropDown />
+        
+      {[1, 2, 3, 4, 5].map((e, i) => <CountryCard loading={loading} />)}
+      </div>
+    );
+  }
 
   return (
-    <div className="home-container">
-      <div className="filter-countries">
-        <SearchBar />
-        <DropDown />
-      </div>
-
-      <div className="countries">
-        {countries.map((country, i) => {
-          return (
-            <Link
-              className="all-links country"
-              to={`country/${country.cca2}`}
-              key={i}
-            >
-              <img className="country-flag-home" src={country.flags.png} alt="" />
-              <h1>{country.name.common}</h1>
-              <div className="country-info-home">
-                <p><strong>Population: </strong>{country.population}</p>
-                <p><strong>Region: </strong>{country.region}</p>
-                <p><strong>Capital: </strong>{country.capital}</p>
-              </div>
-              
-            </Link>
-          );
-        })}
-      </div>
-    </div>
+    <Box sx={{maxWidth: 1150, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 4}}>
+      
+        <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
+          <SearchBar /> 
+          <DropDown />
+        </Box> 
+      
+      <Grid container spacing={4}>
+            {countries.map((country, i) => (
+              <Grid item xs={12} md={4} lg={3} sx={{maxWidth: {xs: 400}}}>
+                <CountryCard
+                  key={i}
+                  countryName={country.name.common}
+                  countryLink={`country/${country.cca2}`}  
+                  countryFlag={country.flags.png}
+                  countryPopulation={country.population}
+                  countryRegion={country.region}
+                  countryCapital={country.capital}
+                  loading={loading}
+                />
+              </Grid>
+              ))}
+      </Grid>
+    </Box>
   );
 };
 
+export const getCountriesByQueryStringLoader = async ({ request }) => {
+  const url = new URL(request.url);
+  const searchParams = new URLSearchParams(url.search);
 
-export const getCountriesByQueryStringLoader = async ({request}) => {
-    const url = new URL(request.url);
-    const searchParams = new URLSearchParams(url.search);
+  const searchQuery = searchParams.get("search");
+  const regionQuery = searchParams.get("region");
 
-    const searchQuery = searchParams.get("search");
-    const regionQuery = searchParams.get("region");
+  let apiUrl = "https://restcountries.com/v3.1/all";
+  if (searchQuery) {
+    apiUrl = `https://restcountries.com/v3.1/name/${searchQuery}`;
+  } else if (regionQuery) {
+    apiUrl = `https://restcountries.com/v3.1/region/${regionQuery}`;
+  }
 
-    let apiUrl = "https://restcountries.com/v3.1/all";
-    if (searchQuery) {
-        apiUrl = `https://restcountries.com/v3.1/name/${searchQuery}`;
-    } else if (regionQuery) {
-        apiUrl = `https://restcountries.com/v3.1/region/${regionQuery}`;
-    }
-
-    const res = await fetch(apiUrl);
-    if (!res.ok) {
-      throw Error("Det gick inte att hämta länderna");
-    }
-    const data = await res.json();
+  const res = await fetch(apiUrl);
+  if (!res.ok) {
+    throw Error("Det gick inte att hämta länderna");
+  }
+  const data = await res.json();
   
-    const sortedData = data.sort((a, b) => {
-      if (a.name.common < b.name.common) return -1;
-      if (a.name.common > b.name.common) return 1;
-      return 0;
-    });
-    return sortedData;
+  const sortedData = data.sort((a, b) => {
+    if (a.name.common < b.name.common) return -1;
+    if (a.name.common > b.name.common) return 1;
+    return 0;
+  });
+  return sortedData;
 };
 
 export default HomePage;
