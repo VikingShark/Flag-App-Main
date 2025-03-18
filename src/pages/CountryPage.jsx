@@ -1,74 +1,173 @@
 import { useLoaderData, Link } from "react-router-dom";
-import "./CountryPage.css";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Button } from '@mui/material';
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { Box, Button, List, ListItem, Typography } from "@mui/material";
 
 const CountryPage = () => {
   const response = useLoaderData();
   const [country] = response;
 
   //Unique native name
-  const firstNativeNameCommon = country.name.nativeName 
-    ? country.name.nativeName[Object.keys(country.name.nativeName || {})[0]]?.common
-    : 'No native name available';
+  const firstNativeNameCommon = country.name.nativeName
+    ? country.name.nativeName[Object.keys(country.name.nativeName || {})[0]]
+        ?.common
+    : "Not available";
 
-  
-    //  Unique currency name
-    const firstNativeCurrencyCommon = country.currencies ? country.currencies[Object.keys(country.currencies || {})[0]]?.name
-    : 'No currency available';
+  //  Unique currency name
+  const firstNativeCurrencyCommon = country.currencies
+    ? country.currencies[Object.keys(country.currencies || {})[0]]?.name
+    : "Not available";
 
   // Unique language
- 
-  const firstNativeLanguage = country.languages ? country.languages[Object.keys(country.languages)[0]] : 'No language available';
+
+  const firstNativeLanguage = country.languages
+    ? country.languages[Object.keys(country.languages)[0]]
+    : "Not available";
 
   console.log(country);
 
   return (
-    <div className="country-page-container">
-      <Link className="all-links" to="/">
+    <Box
+      p={0}
+      m={0}
+      sx={{
+        maxWidth: 1150,
+        height: "75vh",
+        margin: "0 auto",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+        gap: 10,
+      }}
+    >
+      <Link style={{ textDecoration: "none" }} to="/">
         <Button
-            sx={{
-                color: "white",
-                backgroundColor: "transparent",
-                "&:hover": {
-                backgroundColor: "#F2F2F220", 
-                },
-            }}
-            variant="text">
-             {<ArrowBackIcon sx={{fontSize: "20px", mr: 1}} /> }
-            Back
+          sx={{
+            color: "darkmode.primary.white",
+            backgroundColor: "transparent",
+            "&:hover": {
+              backgroundColor: "#F2F2F220",
+            },
+          }}
+          variant="text"
+        >
+          {<ArrowBackIcon sx={{ fontSize: "20px", mr: 1 }} />}
+          Back
         </Button>
       </Link>
-      <div className="country-page">
-        <img className="country-flag" src={country.flags.svg} alt="" />
-        <div className="country-info-container">
-        <h1>{country?.name?.common || "Not available"}</h1>
-          <div className="country-info">
-            <div className="country-child">
-              <p><strong>Population:</strong> {country.population}</p>
-              <p><strong>Region:</strong> {country.region}</p>
-              <p><strong>Region:</strong> {country.capital}</p>
-              <p><strong>Native Name:</strong> {firstNativeNameCommon}</p>
-            </div>
-            <div className="country-child">
-              <p><strong>Top Level Domain:</strong> {country.tld}</p>
-              <p><strong>Currencies:</strong> {firstNativeCurrencyCommon}</p>
-              <p><strong>Language:</strong> {firstNativeLanguage}</p>
-            </div>
-          </div>
-          <div className="border-countries">
-            <p><strong>Border Countries:</strong></p>
-            {country.borders && country.borders.length > 0
-              ? country.borders.map((borderCountry, i) => (
-                  <Link className="all-links border-links" key={i} to={`/country/${borderCountry}`}>
-                    <p>{borderCountry}</p>
+      <Box
+        sx={{
+          display: "flex",
+          gap: 10,
+          width: "100%",
+          height: 500,
+        }}
+      >
+        <img
+          style={{
+            width: "48%",
+            height: "auto",
+            objectFit: "contain",
+            alignSelf: "flex-start",
+            borderRadius: "10px",
+          }}
+          className="country-flag"
+          src={country.flags.svg}
+          alt=""
+        />
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+            width: "48%",
+            textAlign: "left",
+          }}
+        >
+          <Typography
+            variant="h3"
+            sx={{
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {country?.name?.common || "Not available"}
+          </Typography>
+          <Box sx={{ display: "flex", gap: 15 }}>
+            <Box sx={{display: "flex", flexDirection: "column", gap: 1}}>
+              <Typography>
+                <strong>Population:</strong> {country.population}
+              </Typography>
+              <Typography>
+                <strong>Region:</strong> {country?.region || "Not available"}
+              </Typography>
+              <Typography>
+                <strong>Capital:</strong> {country?.capital || "Not available"}
+              </Typography>
+              <Typography>
+                <strong>Native Name:</strong> {firstNativeNameCommon}
+              </Typography>
+            </Box>
+            <Box sx={{display: "flex", flexDirection: "column", gap: 1}}>
+              <Typography>
+                <strong>Top Level Domain:</strong> {country.tld}
+              </Typography>
+              <Typography>
+                <strong>Currencies:</strong> {firstNativeCurrencyCommon}
+              </Typography>
+              <Typography>
+                <strong>Language:</strong> {firstNativeLanguage}
+              </Typography>
+            </Box>
+          </Box>
+          <Box
+            sx={{
+              maxWidth: "95%",
+              display: "flex",
+              alignItems: "center",
+              gap: 2,
+              marginTop: 7,
+            }}
+          >
+            <Typography fontWeight="bold">Border Countries: </Typography>
+            <List
+              sx={{
+                display: "flex",
+                gap: 1, // Mellanrum mellan länkarna
+                overflowX: "auto", // Horisontell scroll om det behövs
+                whiteSpace: "nowrap", // Förhindrar radbrytning
+                paddingY: 1,
+              }}
+            >
+              {country.borders && country.borders.length > 0 ? (
+                country.borders.map((borderCountry, i) => (
+                  <Link to={`/country/${borderCountry}`} key={i}>
+                    <ListItem
+                      key={i}
+                      sx={{
+                        textDecoration: "none",
+                        backgroundColor: "primary.main",
+                        padding: "6px 12px",
+                        borderRadius: "25px",
+                        color: "primary.white",
+                        fontSize: "14px",
+                        display: "inline-block",
+                        transition: "0.3s",
+                        "&:hover": {
+                          backgroundColor: "primary.hover",
+                        },
+                      }}
+                    >
+                      {borderCountry}
+                    </ListItem>
                   </Link>
                 ))
-              : "This country has no Border Countries"}
-          </div>
-        </div>
-      </div>
-    </div>
+              ) : (
+                <Typography>This Country Has No Border Countries</Typography>
+              )}
+            </List>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 

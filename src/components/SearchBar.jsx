@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import TextField from '@mui/material/TextField';
 
 
-const SearchBar = () => {
+const SearchBar = ({darkMode}) => {
     const [searchText, setSearchText] = useState("");
     const navigate = useNavigate();
 
@@ -27,20 +27,18 @@ const SearchBar = () => {
             onChange={handleChange}
             sx={{ width: "33%",
                 "& .MuiOutlinedInput-root": {
-                    color: "white", // Textfärg
-                    caretColor: "#F2F2F2", // 🔥 Ändrar färgen på blinkande textmarkören
-                    "& fieldset": { borderColor: "#3e4a55" }, // Standard: Grå border
-                    "&:hover fieldset": { borderColor: "#F2F2F2" }, // Hover: Vit border
-                    "&.Mui-focused fieldset": { borderColor: "#F2F2F2", borderWidth: 2 }, // Klickad: Vit border + tjockare outline
+                    color: darkMode ? "darkmode.primary.white" : "lightmode.primary.black", 
+                    caretColor: darkMode ? "darkmode.primary.white" : "lightmode.primary.black", 
+                    "& fieldset": { borderColor: "#3e4a55" }, 
+                    "&:hover fieldset": { borderColor: darkMode ? "darkmode.primary.white" : "lightmode.primary.black" }, 
+                    "&.Mui-focused fieldset": { borderColor: darkMode ? "darkmode.primary.white" : "lightmode.primary.black", borderWidth: 2 }, 
                 },
                 "& .MuiInputLabel-root": {
-                    color: "rgba(255, 255, 255, 0.7)", // Standard label
-                    "&.Mui-focused": { color: "#F2F2F2" }, // Klickad: Vit label
+                    color: darkMode ? "#ffffff90" : "#00000095", 
+                    "&.Mui-focused": { color: darkMode ? "darkmode.primary.white" : "lightmode.primary.black" } 
                 },
             }}
         />
-
-        // <input className="search-bar" type="text" value={searchText} onChange={handleChange} placeholder="Search for a country" />
     );
 };
 

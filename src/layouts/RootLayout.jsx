@@ -1,23 +1,21 @@
 import { Outlet } from "react-router-dom";
-import logo from "../assets/techover-logo.png";
-import "./RootLayout.css";
 import Navbar from "../components/Navbar";
 
-import {
-  AppBar,
-  Box,
-  Toolbar,
-  Typography,
-  Button,
-  IconButton,
-} from "@mui/material";
+import { Box } from "@mui/material";
 
-
-const RootLayout = () => {
+const RootLayout = ({ darkMode, setDarkMode }) => {
   return (
-    <Box className="app-container">
-      <Navbar />
-      <main style={{ marginTop: "55px" }}>
+    <Box sx={{
+      backgroundColor: darkMode ? 'darkmode.primary.darkblue' : 'lightmode.primary.main',
+      minHeight: '100vh',
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      padding: 0,
+      margin: 0
+    }}>
+      <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+      <main style={{ marginTop: "100px" }}>
         <Outlet />
       </main>
     </Box>

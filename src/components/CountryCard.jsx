@@ -16,10 +16,11 @@ const CountryCard = ({
   countryRegion,
   countryCapital,
   loading,
+  darkMode
 }) => {
   if (loading) {
     return (
-      <Card>
+      <Card sx={{ backgroundColor: "darkmode.primary.main", maxWidth: {lg: 265}, max: {lg: 265} }}>
         <Skeleton variant="rectangle" sx={{ height: 140 }} />
         <CardContent>
           <Skeleton variant="text" width={150} height={20} />
@@ -33,7 +34,7 @@ const CountryCard = ({
 
   return (
     <Link to={countryLink} style={{ textDecoration: "none" }}>
-      <Card sx={{ textDecoration: "none", backgroundColor: "primary.main", maxWidth: {lg: 265}, max: {lg: 265}, transition: '0.3s', "&:hover": {backgroundColor: "#ffffff20"} }}>
+      <Card sx={{ textDecoration: "none", backgroundColor: darkMode ? "darkmode.primary.main" : "lightmode.primary.main", maxWidth: {lg: 265}, max: {lg: 265}, transition: '0.3s', "&:hover": {backgroundColor: "primary.hover"} }}>
         <CardMedia
           image={countryFlag}
           title={countryName}
@@ -53,7 +54,10 @@ const CountryCard = ({
           <Typography
             variant="h7"
             sx={{
-              color: "primary.white",
+              color: darkMode ? "darkmode.primary.white" : "lightmode.primary.black",
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              // whiteSpace: 'nowrap',
             }}
           >
             <strong>{countryName}</strong>
@@ -66,15 +70,15 @@ const CountryCard = ({
               alignItems: "flex-start",
             }}
           >
-            <Typography sx={{ color: "#ffffff90", fontSize: 14 }}>
+            <Typography sx={{ color: darkMode ? "#ffffff90" : "#00000095", fontSize: 14 }}>
               <strong>Population: </strong>
               {countryPopulation}
             </Typography>
-            <Typography sx={{ color: "#ffffff90", fontSize: 14 }}>
+            <Typography sx={{ color: darkMode ? "#ffffff90" : "#00000095", fontSize: 14 }}>
               <strong>Region: </strong>
               {countryRegion}
             </Typography>
-            <Typography sx={{ color: "#ffffff90", fontSize: 14 }}>
+            <Typography sx={{ color: darkMode ? "#ffffff90" : "#00000095", fontSize: 14 }}>
               <strong>Capital: </strong>
               {countryCapital}
             </Typography>

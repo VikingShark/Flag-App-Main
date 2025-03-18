@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import './App.css'
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -14,25 +13,30 @@ import CountryPage, {CountryPageLoader} from './pages/CountryPage'
 
 /* Layouts */
 import RootLayout from './layouts/RootLayout'
+import { Box } from '@mui/material'
 
 
-const routesFromElements = createRoutesFromElements(
-  <Route path="/" element={<RootLayout />}>
-    <Route index element={<HomePage />} loader={getCountriesByQueryStringLoader} />
-    <Route path="country/:CountryCode" element={<CountryPage />} loader={CountryPageLoader} />
-  </Route>
-)
-
-const router = createBrowserRouter(routesFromElements);
 
 
 function App() {
 
+  const [darkMode, setDarkMode] = useState(true)
+
+
+  const routesFromElements = createRoutesFromElements(
+    <Route path="/" element={<RootLayout darkMode={darkMode} setDarkMode={setDarkMode}  />}>
+      <Route index element={<HomePage darkMode={darkMode} setDarkMode={setDarkMode} />} loader={getCountriesByQueryStringLoader} />
+      <Route path="country/:CountryCode" element={<CountryPage />} loader={CountryPageLoader} />
+    </Route>
+  )
+
+  const router = createBrowserRouter(routesFromElements);
+ 
   return (
     <>
-      <div className="App">
+      <Box> 
           <RouterProvider router={router}/>
-      </div>
+      </Box>
     </>
   )
 }
