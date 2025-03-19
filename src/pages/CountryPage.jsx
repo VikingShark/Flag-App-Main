@@ -7,9 +7,11 @@ const CountryPage = ({darkMode}) => {
   const response = useLoaderData();
   const [country] = response;
   const [loading, setLoading] = useState(true);
+  
 
   useEffect(() => {
-      if (country.length > 0) {
+      if (country) {
+        console.log(country)
         setLoading(false);
       }
     }, [country]); 
@@ -32,7 +34,7 @@ const CountryPage = ({darkMode}) => {
     : "Not available";
 
 
-  if(true) {
+  if(loading) {
     return (    
     <Box
       p={0}

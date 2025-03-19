@@ -44,7 +44,7 @@ const CountryCard = ({
 
   return (
     <Link to={countryLink} style={{ textDecoration: "none" }}>
-      <Card sx={{ textDecoration: "none", backgroundColor: darkMode ? "darkmode.primary.main" : "lightmode.primary.main", maxWidth: {lg: 265}, max: {lg: 265}, transition: '0.3s', "&:hover": {backgroundColor: "primary.hover"} }}>
+      <Card sx={{ textDecoration: "none", backgroundColor: darkMode ? "darkmode.primary.main" : "lightmode.primary.main", maxWidth: {lg: 265}, max: {lg: 265}, transition: '0.3s', "&:hover": {backgroundColor: darkMode ? "darkmode.primary.hover" : "lightmode.primary.hover"} }}>
         <CardMedia
           image={countryFlag}
           title={countryName}
