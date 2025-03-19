@@ -22,6 +22,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        padding: "0 24px"
       }}
     >
       <Toolbar
@@ -30,18 +31,19 @@ const Navbar = ({ darkMode, setDarkMode }) => {
           maxWidth: 1150,
           display: "flex",
           justifyContent: "space-between",
-          alignItems: 'center'
+          alignItems: 'center',
+         
         }}
       >
         <Typography sx={{color: darkMode ? "darkmode.primary.white" : "lightmode.primary.black"}} fontSize={20}>The Flag App</Typography>
-        <img src={darkMode ? logoDarkMode : logoLightMode} alt="Techover Logo" />
+        <Box component="img" src={darkMode ? logoDarkMode : logoLightMode} sx={{display: {xs: 'none', md: 'block'}}} alt="Techover Logo" />
         <Button
           onClick={toggleDarkMode}
           sx={{
             color: darkMode ? "darkmode.primary.white" : "lightmode.primary.black",
             backgroundColor: "transparent",
             "&:hover": {
-              backgroundColor: "#F2F2F220",
+              backgroundColor: darkMode ? "darkmode.primary.hover" : "lightmode.primary.hover",
             },
           }}
         >

@@ -20,13 +20,23 @@ const CountryCard = ({
 }) => {
   if (loading) {
     return (
-      <Card sx={{ backgroundColor: "darkmode.primary.main", maxWidth: {lg: 265}, max: {lg: 265} }}>
+      <Card sx={{ backgroundColor: darkMode ? "darkmode.primary.main" : "lightmode.primary.main", maxWidth: {lg: 265}, max: {lg: 265} }}>
         <Skeleton variant="rectangle" sx={{ height: 140 }} />
-        <CardContent>
-          <Skeleton variant="text" width={150} height={20} />
-          <Skeleton variant="text" width={150} height={20} />
-          <Skeleton variant="text" width={150} height={20} />
-          <Skeleton variant="text" width={150} height={20} />
+        <CardContent sx={{display: 'flex', flexDirection: 'column'}}>
+          <Skeleton sx={{marginBottom: '10px'}} variant="text" width={200} height={20}></Skeleton>
+          <Box sx={{display: 'flex', gap: 1, alignItems: 'center'}}>
+            <Typography sx={{color: darkMode ? "#ffffff90" : "#00000095", fontSize: 14}}><strong>Population: </strong></Typography>
+            <Skeleton variant="text" width={50} height={20} />
+          </Box>
+          <Box sx={{display: 'flex', gap: 1, alignItems: 'center'}}>
+            <Typography sx={{color: darkMode ? "#ffffff90" : "#00000095", fontSize: 14}}><strong>Region: </strong></Typography>
+            <Skeleton variant="text" width={80} height={20} />
+          </Box>
+          <Box sx={{display: 'flex', gap: 1, alignItems: 'center'}}>
+            <Typography sx={{color: darkMode ? "#ffffff90" : "#00000095", fontSize: 14}}><strong>Capital: </strong></Typography>
+            <Skeleton variant="text" width={80} height={20} />
+          </Box>
+          
         </CardContent>
       </Card>
     );

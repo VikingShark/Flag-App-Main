@@ -25,8 +25,8 @@ function App() {
 
   const routesFromElements = createRoutesFromElements(
     <Route path="/" element={<RootLayout darkMode={darkMode} setDarkMode={setDarkMode}  />}>
-      <Route index element={<HomePage darkMode={darkMode} setDarkMode={setDarkMode} />} loader={getCountriesByQueryStringLoader} />
-      <Route path="country/:CountryCode" element={<CountryPage />} loader={CountryPageLoader} />
+      <Route index element={<HomePage darkMode={darkMode} />} loader={getCountriesByQueryStringLoader} />
+      <Route path="country/:CountryCode" element={<CountryPage darkMode={darkMode} />} loader={CountryPageLoader} />
     </Route>
   )
 

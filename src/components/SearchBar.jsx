@@ -25,7 +25,7 @@ const SearchBar = ({darkMode}) => {
             variant="outlined"
             value={searchText}
             onChange={handleChange}
-            sx={{ width: "33%",
+            sx={{ width: {xs: "100%", md: "33%" },
                 "& .MuiOutlinedInput-root": {
                     color: darkMode ? "darkmode.primary.white" : "lightmode.primary.black", 
                     caretColor: darkMode ? "darkmode.primary.white" : "lightmode.primary.black", 

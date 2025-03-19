@@ -9,7 +9,7 @@ import SearchBar from "../components/SearchBar";
 import DropDown from "../components/DropDown";
 import CountryCard from "../components/CountryCard";
 
-const HomePage = ({darkMode, setDarkMode }) => {
+const HomePage = ({darkMode}) => {
   const countries = useLoaderData();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -34,6 +34,7 @@ const HomePage = ({darkMode, setDarkMode }) => {
           display: "flex",
           flexDirection: "column",
           gap: 4,
+          padding: "0 30px"
         }}
       >
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -44,7 +45,7 @@ const HomePage = ({darkMode, setDarkMode }) => {
         <Grid container spacing={4}>
           {loadingArray.map((country, i) => (
             <Grid item xs={12} md={4} lg={3} sx={{ maxWidth: { xs: 400 } }}>
-                <CountryCard loading={loading} />
+                <CountryCard key={i} loading={loading} darkMode={darkMode} />
             </Grid>
           ))}
         </Grid>
@@ -60,16 +61,17 @@ const HomePage = ({darkMode, setDarkMode }) => {
         display: "flex",
         flexDirection: "column",
         gap: 4,
+        padding: "0 30px"
       }}
     >
-      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+      <Box sx={{ display: "flex", justifyContent: "space-between", flexDirection: {xs: 'column', md: 'row'}, gap: {xs: 2, md: 0} }}>
         <SearchBar darkMode={darkMode}  />
         <DropDown darkMode={darkMode}  />
       </Box>
 
-      <Grid container spacing={4}>
+      <Grid container spacing={4} sx={{display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: {sm: 'column', md: 'row'}}}>
         {countries.map((country, i) => (
-          <Grid item xs={12} md={4} lg={3} sx={{ maxWidth: { xs: 400 } }}>
+          <Grid item xs={12} sm={12} md={4} lg={3} sx={{ width: '100%', maxWidth: { xs: '400px' } }}>
             <CountryCard
               key={i}
               countryName={country.name.common}

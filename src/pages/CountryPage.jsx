@@ -1,10 +1,18 @@
 import { useLoaderData, Link } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { Box, Button, List, ListItem, Typography } from "@mui/material";
+import { Box, Button, List, ListItem, Skeleton, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 
-const CountryPage = () => {
+const CountryPage = ({darkMode}) => {
   const response = useLoaderData();
   const [country] = response;
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+      if (country.length > 0) {
+        setLoading(false);
+      }
+    }, [country]); 
 
   //Unique native name
   const firstNativeNameCommon = country.name.nativeName
@@ -23,7 +31,72 @@ const CountryPage = () => {
     ? country.languages[Object.keys(country.languages)[0]]
     : "Not available";
 
-  console.log(country);
+
+  if(true) {
+    return (    
+    <Box
+      p={0}
+      m={0}
+      sx={{
+        maxWidth: 1150,
+        height: "75vh",
+        margin: "0 auto",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+        gap: 10,
+        border: "1px solid red"
+      }}
+    >
+      <Link style={{ textDecoration: "none" }} to="/">
+        <Button
+          sx={{
+            color: darkMode ? "darkmode.primary.white" : "lightmode.primary.black",
+            backgroundColor: "transparent",
+            "&:hover": {
+              backgroundColor: darkMode ? "darkmode.primary.hover" : "lightmode.primary.hover",
+            },
+          }}
+          variant="text"
+        >
+          {<ArrowBackIcon sx={{ fontSize: "20px", mr: 1 }} />}
+          Back
+        </Button>
+      </Link>
+      <Box
+        sx={{
+          display: "flex",
+          gap: 10,
+          width: "100%",
+          height: 500,
+        }}
+      >
+        <Skeleton variant="rectangle" sx={{ height: 300, width:'48%', borderRadius: '10px', backgroundColor: 'white' }} />
+        <Box sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+            width: "48%",
+            border: "1px solid red",
+            height: 300
+          }}>
+            <Skeleton variant="text" width={200} height={60}></Skeleton>
+            <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
+              <Box>
+                <Box sx={{display: 'flex', gap: 1, alignItems: 'center'}}>
+                  <Typography>Population: </Typography>
+                  <Skeleton variant="text" width={50} height={20} />
+                </Box>
+              </Box>
+              <Box>
+
+              </Box>
+            </Box>
+
+        </Box>
+      </Box>
+    </Box>
+  )}
 
   return (
     <Box
@@ -42,10 +115,10 @@ const CountryPage = () => {
       <Link style={{ textDecoration: "none" }} to="/">
         <Button
           sx={{
-            color: "darkmode.primary.white",
+            color: darkMode ? "darkmode.primary.white" : "lightmode.primary.black",
             backgroundColor: "transparent",
             "&:hover": {
-              backgroundColor: "#F2F2F220",
+              backgroundColor: darkMode ? "darkmode.primary.hover" : "lightmode.primary.hover",
             },
           }}
           variant="text"
@@ -87,53 +160,54 @@ const CountryPage = () => {
             variant="h3"
             sx={{
               whiteSpace: 'nowrap',
+              color: darkMode ? "darkmode.primary.white" : "lightmode.primary.black"
             }}
           >
             {country?.name?.common || "Not available"}
           </Typography>
           <Box sx={{ display: "flex", gap: 15 }}>
             <Box sx={{display: "flex", flexDirection: "column", gap: 1}}>
-              <Typography>
+              <Typography sx={{color: darkMode ? "darkmode.primary.white" : "lightmode.primary.black"}}>
                 <strong>Population:</strong> {country.population}
               </Typography>
-              <Typography>
+              <Typography sx={{color: darkMode ? "darkmode.primary.white" : "lightmode.primary.black"}}>
                 <strong>Region:</strong> {country?.region || "Not available"}
               </Typography>
-              <Typography>
+              <Typography sx={{color: darkMode ? "darkmode.primary.white" : "lightmode.primary.black"}}>
                 <strong>Capital:</strong> {country?.capital || "Not available"}
               </Typography>
-              <Typography>
+              <Typography sx={{color: darkMode ? "darkmode.primary.white" : "lightmode.primary.black"}}>
                 <strong>Native Name:</strong> {firstNativeNameCommon}
               </Typography>
             </Box>
             <Box sx={{display: "flex", flexDirection: "column", gap: 1}}>
-              <Typography>
+              <Typography sx={{color: darkMode ? "darkmode.primary.white" : "lightmode.primary.black"}}>
                 <strong>Top Level Domain:</strong> {country.tld}
               </Typography>
-              <Typography>
+              <Typography sx={{color: darkMode ? "darkmode.primary.white" : "lightmode.primary.black"}}>
                 <strong>Currencies:</strong> {firstNativeCurrencyCommon}
               </Typography>
-              <Typography>
+              <Typography sx={{color: darkMode ? "darkmode.primary.white" : "lightmode.primary.black"}}>
                 <strong>Language:</strong> {firstNativeLanguage}
               </Typography>
             </Box>
           </Box>
           <Box
             sx={{
-              maxWidth: "95%",
+              maxWidth: "100%",
               display: "flex",
               alignItems: "center",
-              gap: 2,
+              gap: 1,
               marginTop: 7,
             }}
           >
-            <Typography fontWeight="bold">Border Countries: </Typography>
+            <Typography fontWeight="bold" sx={{color: darkMode ? "darkmode.primary.white" : "lightmode.primary.black"}}>Border Countries: </Typography>
             <List
               sx={{
                 display: "flex",
-                gap: 1, // Mellanrum mellan länkarna
-                overflowX: "auto", // Horisontell scroll om det behövs
-                whiteSpace: "nowrap", // Förhindrar radbrytning
+                gap: 1, 
+                overflowX: "auto", 
+                whiteSpace: "nowrap",
                 paddingY: 1,
               }}
             >
@@ -144,15 +218,15 @@ const CountryPage = () => {
                       key={i}
                       sx={{
                         textDecoration: "none",
-                        backgroundColor: "primary.main",
+                        backgroundColor: darkMode ? "#F2F2F230" : "#00000010",
                         padding: "6px 12px",
                         borderRadius: "25px",
-                        color: "primary.white",
+                        color: darkMode ? "darkmode.primary.white" : "lightmode.primary.black",
                         fontSize: "14px",
                         display: "inline-block",
                         transition: "0.3s",
                         "&:hover": {
-                          backgroundColor: "primary.hover",
+                          backgroundColor: darkMode ? "#F2F2F245" : "#00000020",
                         },
                       }}
                     >
@@ -161,7 +235,7 @@ const CountryPage = () => {
                   </Link>
                 ))
               ) : (
-                <Typography>This Country Has No Border Countries</Typography>
+                <Typography sx={{color: darkMode ? "darkmode.primary.white" : "lightmode.primary.black"}}>This Country Has No Border Countries</Typography>
               )}
             </List>
           </Box>

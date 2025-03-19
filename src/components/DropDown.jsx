@@ -29,7 +29,7 @@ const DropDown = ({ darkMode }) => {
     <FormControl
       fullWidth
       sx={{
-        width: "15%",
+        width: {xs: "50%", md: "15%"} ,
         "& .MuiOutlinedInput-root": {
           color: darkMode ? "darkmode.primary.white" : "lightmode.primary.black",
           "& fieldset": { borderColor: "#3e4a55" },
