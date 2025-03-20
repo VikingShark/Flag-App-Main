@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TextField from '@mui/material/TextField';
 
@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 const SearchBar = ({darkMode}) => {
     const [searchText, setSearchText] = useState("");
     const navigate = useNavigate();
+
 
     const handleChange = (event) => {
         const value = event.target.value;

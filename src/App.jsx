@@ -10,6 +10,7 @@ import {
 /* Pages */
 import HomePage, { getCountriesByQueryStringLoader} from './pages/Home'
 import CountryPage, {CountryPageLoader} from './pages/CountryPage'
+import NotFound from './pages/NotFound'
 
 /* Layouts */
 import RootLayout from './layouts/RootLayout'
@@ -27,6 +28,7 @@ function App() {
     <Route path="/" element={<RootLayout darkMode={darkMode} setDarkMode={setDarkMode}  />}>
       <Route index element={<HomePage darkMode={darkMode} />} loader={getCountriesByQueryStringLoader} />
       <Route path="country/:CountryCode" element={<CountryPage darkMode={darkMode} />} loader={CountryPageLoader} />
+      <Route path="*" element={<NotFound />} />
     </Route>
   )
 

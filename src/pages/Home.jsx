@@ -2,12 +2,14 @@ import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
   Box,
-  Grid
+  Grid,
+  Typography
 } from "@mui/material";
 
 import SearchBar from "../components/SearchBar";
 import DropDown from "../components/DropDown";
 import CountryCard from "../components/CountryCard";
+import NotFound from "./NotFound";
 
 const HomePage = ({darkMode}) => {
   const countries = useLoaderData();
@@ -16,7 +18,7 @@ const HomePage = ({darkMode}) => {
   const loadingArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
   useEffect(() => {
-    if (countries.length > 0) {
+    if (countries?.length > 0) {
       setLoading(false);
     }
   }, [countries]);
@@ -28,28 +30,33 @@ const HomePage = ({darkMode}) => {
   if (loading) {
     return (
       <Box
-        sx={{
-          maxWidth: 1150,
-          margin: "0 auto",
-          display: "flex",
-          flexDirection: "column",
-          gap: 4,
-          padding: "0 30px"
-        }}
-      >
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <SearchBar darkMode={darkMode} />
-          <DropDown darkMode={darkMode} />
-        </Box>
-
-        <Grid container spacing={4}>
-          {loadingArray.map((country, i) => (
-            <Grid item xs={12} md={4} lg={3} sx={{ maxWidth: { xs: 400 } }}>
-                <CountryCard key={i} loading={loading} darkMode={darkMode} />
-            </Grid>
-          ))}
-        </Grid>
+      sx={{
+        maxWidth: 1150,
+        margin: "0 auto",
+        display: "flex",
+        flexDirection: "column",
+        gap: 4,
+        padding: "0 30px"
+      }}
+    >
+      <Box sx={{ display: "flex", justifyContent: "space-between", flexDirection: {xs: 'column', md: 'row'}, gap: {xs: 2, md: 0} }}>
+        <SearchBar darkMode={darkMode}  />
+        <DropDown darkMode={darkMode}  />
       </Box>
+
+         <Grid container spacing={4} sx={{display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: {sm: 'column', md: 'row'}}}>
+         {loadingArray.map((country, i) => (
+           <Grid item xs={12} sm={12} md={4} lg={3} sx={{ width: '100%', maxWidth: { xs: '400px' } }}>
+             <CountryCard
+               key={i}
+               loading={loading}
+               darkMode={darkMode} 
+             />
+           </Grid>
+         ))}
+       </Grid>
+      
+    </Box>
     );
   }
 
@@ -69,23 +76,25 @@ const HomePage = ({darkMode}) => {
         <DropDown darkMode={darkMode}  />
       </Box>
 
-      <Grid container spacing={4} sx={{display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: {sm: 'column', md: 'row'}}}>
-        {countries.map((country, i) => (
-          <Grid item xs={12} sm={12} md={4} lg={3} sx={{ width: '100%', maxWidth: { xs: '400px' } }}>
-            <CountryCard
-              key={i}
-              countryName={country.name.common}
-              countryLink={`country/${country.cca2}`}
-              countryFlag={country.flags.png}
-              countryPopulation={country.population}
-              countryRegion={country.region}
-              countryCapital={country.capital}
-              loading={loading}
-              darkMode={darkMode} 
-            />
-          </Grid>
-        ))}
-      </Grid>
+      {!countries ?  <NotFound darkMode={darkMode} />  : (
+         <Grid container spacing={4} sx={{display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: {sm: 'column', md: 'row'}}}>
+         {countries.map((country, i) => (
+           <Grid item xs={12} sm={12} md={4} lg={3} sx={{ width: '100%', maxWidth: { xs: '400px' } }}>
+             <CountryCard
+               key={i}
+               countryName={country.name.common}
+               countryLink={`country/${country.cca2}`}
+               countryFlag={country.flags.png}
+               countryPopulation={country.population}
+               countryRegion={country.region}
+               countryCapital={country.capital}
+               loading={loading}
+               darkMode={darkMode} 
+             />
+           </Grid>
+         ))}
+       </Grid>
+      )}
     </Box>
   );
 };
@@ -106,7 +115,8 @@ export const getCountriesByQueryStringLoader = async ({ request }) => {
 
   const res = await fetch(apiUrl);
   if (!res.ok) {
-    throw Error("Det gick inte att hämta länderna");
+    return;
+
   }
   const data = await res.json();
 

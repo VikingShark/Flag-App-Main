@@ -16,27 +16,51 @@ const CountryCard = ({
   countryRegion,
   countryCapital,
   loading,
-  darkMode
+  darkMode,
 }) => {
   if (loading) {
     return (
-      <Card sx={{ backgroundColor: darkMode ? "darkmode.primary.main" : "lightmode.primary.main", maxWidth: {lg: 265}, max: {lg: 265} }}>
+      <Card
+        sx={{
+          backgroundColor: darkMode
+            ? "darkmode.primary.main"
+            : "lightmode.primary.main",
+          maxWidth: 265,
+          maxWidth: {lg: 257}
+        }}
+      >
         <Skeleton variant="rectangle" sx={{ height: 140 }} />
-        <CardContent sx={{display: 'flex', flexDirection: 'column'}}>
-          <Skeleton sx={{marginBottom: '10px'}} variant="text" width={200} height={20}></Skeleton>
-          <Box sx={{display: 'flex', gap: 1, alignItems: 'center'}}>
-            <Typography sx={{color: darkMode ? "#ffffff90" : "#00000095", fontSize: 14}}><strong>Population: </strong></Typography>
+        <CardContent sx={{ display: "flex", flexDirection: "column" }}>
+          <Skeleton
+            sx={{ marginBottom: "10px" }}
+            variant="text"
+            width={200}
+            height={20}
+          ></Skeleton>
+          <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+            <Typography
+              sx={{ color: darkMode ? "#ffffff90" : "#00000095", fontSize: 14 }}
+            >
+              <strong>Population: </strong>
+            </Typography>
             <Skeleton variant="text" width={50} height={20} />
           </Box>
-          <Box sx={{display: 'flex', gap: 1, alignItems: 'center'}}>
-            <Typography sx={{color: darkMode ? "#ffffff90" : "#00000095", fontSize: 14}}><strong>Region: </strong></Typography>
+          <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+            <Typography
+              sx={{ color: darkMode ? "#ffffff90" : "#00000095", fontSize: 14 }}
+            >
+              <strong>Region: </strong>
+            </Typography>
             <Skeleton variant="text" width={80} height={20} />
           </Box>
-          <Box sx={{display: 'flex', gap: 1, alignItems: 'center'}}>
-            <Typography sx={{color: darkMode ? "#ffffff90" : "#00000095", fontSize: 14}}><strong>Capital: </strong></Typography>
+          <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+            <Typography
+              sx={{ color: darkMode ? "#ffffff90" : "#00000095", fontSize: 14 }}
+            >
+              <strong>Capital: </strong>
+            </Typography>
             <Skeleton variant="text" width={80} height={20} />
           </Box>
-          
         </CardContent>
       </Card>
     );
@@ -44,7 +68,22 @@ const CountryCard = ({
 
   return (
     <Link to={countryLink} style={{ textDecoration: "none" }}>
-      <Card sx={{ textDecoration: "none", backgroundColor: darkMode ? "darkmode.primary.main" : "lightmode.primary.main", maxWidth: {lg: 265}, max: {lg: 265}, transition: '0.3s', "&:hover": {backgroundColor: darkMode ? "darkmode.primary.hover" : "lightmode.primary.hover"} }}>
+      <Card
+        sx={{
+          textDecoration: "none",
+          backgroundColor: darkMode
+            ? "darkmode.primary.main"
+            : "lightmode.primary.main",
+          maxHeight: 265,
+          maxWidth: {lg: 257},
+          transition: "0.3s",
+          "&:hover": {
+            backgroundColor: darkMode
+              ? "darkmode.primary.hover"
+              : "lightmode.primary.hover",
+          },
+        }}
+      >
         <CardMedia
           image={countryFlag}
           title={countryName}
@@ -58,16 +97,18 @@ const CountryCard = ({
             flexDirection: "column",
             alignItems: "flex-start",
             gap: 1,
-            
           }}
         >
           <Typography
             variant="h7"
             sx={{
-              color: darkMode ? "darkmode.primary.white" : "lightmode.primary.black",
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              // whiteSpace: 'nowrap',
+              color: darkMode
+                ? "darkmode.primary.white"
+                : "lightmode.primary.black",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: 'nowrap',
+              width: '100%'
             }}
           >
             <strong>{countryName}</strong>
@@ -80,15 +121,21 @@ const CountryCard = ({
               alignItems: "flex-start",
             }}
           >
-            <Typography sx={{ color: darkMode ? "#ffffff90" : "#00000095", fontSize: 14 }}>
+            <Typography
+              sx={{ color: darkMode ? "#ffffff90" : "#00000095", fontSize: 14 }}
+            >
               <strong>Population: </strong>
               {countryPopulation}
             </Typography>
-            <Typography sx={{ color: darkMode ? "#ffffff90" : "#00000095", fontSize: 14 }}>
+            <Typography
+              sx={{ color: darkMode ? "#ffffff90" : "#00000095", fontSize: 14 }}
+            >
               <strong>Region: </strong>
               {countryRegion}
             </Typography>
-            <Typography sx={{ color: darkMode ? "#ffffff90" : "#00000095", fontSize: 14 }}>
+            <Typography
+              sx={{ color: darkMode ? "#ffffff90" : "#00000095", fontSize: 14 }}
+            >
               <strong>Capital: </strong>
               {countryCapital}
             </Typography>
