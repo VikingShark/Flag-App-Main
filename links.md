@@ -1,2 +1,2 @@
-- [Github repository](https://ditt-repo-här)
+- [Github repository](https://github.com/VikingShark/Flag-App-Main)
 - [Deployat projekt](https://ditt-projekt-här)

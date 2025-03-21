@@ -25,7 +25,6 @@ const CountryCard = ({
           backgroundColor: darkMode
             ? "darkmode.primary.main"
             : "lightmode.primary.main",
-          maxWidth: 265,
           maxWidth: {lg: 257}
         }}
       >

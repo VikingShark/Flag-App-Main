@@ -340,6 +340,7 @@ const CountryPage = ({ darkMode }) => {
             sx={{
               display: "flex",
               flexDirection: { xs: "column", md: "row" },
+              justifyContent: "space-between",
               gap: { xs: 1, md: 5 },
             }}
           >
@@ -417,7 +418,7 @@ const CountryPage = ({ darkMode }) => {
               display: "flex",
               alignItems: "center",
               gap: 1,
-              marginTop: 7,
+              marginTop: 6,
             }}
           >
             <Typography
@@ -436,7 +437,7 @@ const CountryPage = ({ darkMode }) => {
                 gap: 1,
                 overflowX: "auto",
                 whiteSpace: "nowrap",
-                paddingY: 1,
+                paddingY: 0,
               }}
             >
               {country.borders && country.borders.length > 0 ? (

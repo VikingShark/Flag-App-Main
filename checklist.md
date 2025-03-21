@@ -1,21 +1,21 @@
 För att få godkänt måste min inlämning stämma överens med dessa punkter:
 
-- [ ] Min app efterliknar designen till punkt och pricka. Om du tittar på min app och sedan på prototypbilderna är det svårt att se någon skillnad.
-- [ ] Jag följer instruktionerna i style-guide.md
-- [ ] Min app är uppbyggd av komponenter. Den inkluderar åtminstonde dessa:
-  - [ ] Navbar
-  - [ ] Sökfält (Search)
-  - [ ] Dropdown
-  - [ ] CountryCard
-  - [ ] HomePage
-  - [ ] CountryPage
-- [ ] Användaren kan se alla länder på hemmaskärmen
-- [ ] Användaren kan söka på ett land via ett sökfält
-- [ ] Användaren kan filtrera efter länder baserat på deras region
-- [ ] Om en användare trycker på ett land från hemmaskärmen kommer de till en detaljerad vy av det landet.
-- [ ] I detaljvyn visas grannländer. Användaren kan trycka på dessa för att navigera vidare till det valda landet.
-- [ ] Användaren kan växla mellan light och dark mode via navbaren.
-- [ ] När data laddas in i appen visas ett loading state för användaren.
-- [ ] Användaren kan navigera genom appen med hjälp av routes. D.v.s. användaren kan skriva i URL:en för att hoppa mellan de olika sidorna i appen.
-- [ ] Jag har deployat mitt projekt. En länk till projektet finns i links.md.
-- [ ] Jag har laddat upp mitt projekt på Github. En länk till projektet finns i links.md.
+- [X] Min app efterliknar designen till punkt och pricka. Om du tittar på min app och sedan på prototypbilderna är det svårt att se någon skillnad.
+- [X] Jag följer instruktionerna i style-guide.md
+- [X] Min app är uppbyggd av komponenter. Den inkluderar åtminstonde dessa:
+  - [X] Navbar
+  - [X] Sökfält (Search)
+  - [X] Dropdown
+  - [X] CountryCard
+  - [X] HomePage
+  - [X] CountryPage
+- [X] Användaren kan se alla länder på hemmaskärmen
+- [X] Användaren kan söka på ett land via ett sökfält
+- [X] Användaren kan filtrera efter länder baserat på deras region
+- [X] Om en användare trycker på ett land från hemmaskärmen kommer de till en detaljerad vy av det landet.
+- [X] I detaljvyn visas grannländer. Användaren kan trycka på dessa för att navigera vidare till det valda landet.
+- [X] Användaren kan växla mellan light och dark mode via navbaren.
+- [X] När data laddas in i appen visas ett loading state för användaren.
+- [X] Användaren kan navigera genom appen med hjälp av routes. D.v.s. användaren kan skriva i URL:en för att hoppa mellan de olika sidorna i appen.
+- [X] Jag har deployat mitt projekt. En länk till projektet finns i links.md.
+- [X] Jag har laddat upp mitt projekt på Github. En länk till projektet finns i links.md.
