@@ -310,6 +310,7 @@ const CountryPage = ({ darkMode }) => {
             objectFit: "contain",
             alignSelf: "flex-start",
             borderRadius: "10px",
+            maxHeight: 400
           }}
           className="country-flag"
           src={country.flags.svg}
